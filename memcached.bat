@@ -15,7 +15,7 @@ pause
 start "" "%memcahe_dir%\memcached.exe" -d install
 echo memcached安装成功!是否启动？
 pause
-start "" "%memcahe_dir%\memcached.exe" –l 127.0.0.1 -p 11211 start
+start "" "%memcahe_dir%\memcached.exe" -d start
 echo memcached启动成功！
 call:operas %memcahe_dir%
 
@@ -35,7 +35,7 @@ echo 内容不能为空
 )
 if "%opera%"=="1"  (
 %~1\memcached.exe -d stop
-start "" "%~1\memcached.exe" –l 127.0.0.1 -p 11211 start
+start "" "%~1\memcached.exe" -d start
 echo memcached重启成功！
 call:operas %~1
 )
