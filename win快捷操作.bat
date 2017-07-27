@@ -1,7 +1,8 @@
 ::常用集合,随时补充  ---by lovefc
 @echo off
 :operas
-echo 快速操作 1:任务管理器 2:打开记事本 3:打开服务 4:控制面板 5:远程桌面 6:垃圾清理 88:关机 
+echo 快速操作 1:任务管理器 2:打开记事本 3:打开服务 4:控制面板
+echo. 5:远程桌面  6:垃圾清理 88:关机 
 set /p opera= 
 if not defined opera (
 echo 内容不能为空
