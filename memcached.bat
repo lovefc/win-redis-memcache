@@ -1,4 +1,5 @@
 ::其实这个脚本我并不确定能在你们的机器上运行起来  ---by lovefc
+::兼容win10 2018-07-14
 @echo off 
 echo 检测系统。。。。
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers" /v "c:\windows\system32\cmd.exe" /d "RUNASADMIN" /f
@@ -15,7 +16,7 @@ pause
 start "" "%memcahe_dir%\memcached.exe" -d install
 echo memcached安装成功!是否启动？
 pause
-start "" "%memcahe_dir%\memcached.exe" -d start
+start "" "%memcahe_dir%\memcached.exe" start
 echo memcached启动成功！
 call:operas %memcahe_dir%
 
@@ -32,10 +33,11 @@ echo 接下来可以选择的操作 1:重启 2:关闭 3:卸载
 set /p opera= 
 if not defined opera (
 echo 内容不能为空
+call:operas %~1
 )
 if "%opera%"=="1"  (
-%~1\memcached.exe -d stop
-start "" "%~1\memcached.exe" -d start
+taskkill /im "memcached.exe" /f
+start "" "%~1\memcached.exe" start
 echo memcached重启成功！
 call:operas %~1
 )
@@ -49,5 +51,6 @@ if "%opera%"=="3"  (
 %~1\memcached.exe -d uninstall
 echo 注意查看本地服务
 pause
+exit
 )
 GOTO:EOF 
